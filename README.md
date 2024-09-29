@@ -17,7 +17,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [F
 
 ```bash
 git clone https://github.com/onlymearham/Flutter-News-App.git
-cd news_app
+cd Flutter-News-App
 ```
 
 ### Install dependencies
