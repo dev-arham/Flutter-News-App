@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/components/custom_news_tile.dart';
-import 'package:news_app/models/article_model.dart';
-import 'package:news_app/services/api_service.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'explore_page.dart';
+import 'trending_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,28 +11,57 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  ApiService userService = ApiService();
+  int selectedIndex = 0;
+  final List<Widget> pages = const [TrendingPage(), ExplorePage()];
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: FutureBuilder(
-            future: userService.getArticle(),
-            builder: (context, AsyncSnapshot<NewsResponseModel> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return const Center(child: Text('Error'));
-              } else {
-                return ListView.builder(
-                  itemCount: snapshot.data?.articles?.length,
-                  itemBuilder: (context, index) {
-                    return customNewsTile(context,
-                        article: snapshot.data?.articles?[index]);
-                  },
-                );
-              }
-            }),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Arham News 24/7',
+          style: TextStyle(
+              fontFamily: "inter", fontSize: 24, color: Colors.blue.shade400),
+        ),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+      ),
+      body: pages[selectedIndex], // Displays the selected page
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.blue.shade300,
+          borderRadius: BorderRadius.circular(100),
+        ),
+        padding: const EdgeInsets.all(8),
+        child: GNav(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          rippleColor: Colors.grey.shade500,
+          hoverColor: Colors.grey.shade300,
+          activeColor: Colors.black,
+          iconSize: 24,
+          duration: const Duration(milliseconds: 400),
+          tabBackgroundColor: Colors.white,
+          color: Colors.black,
+          tabMargin: const EdgeInsets.all(5),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          tabs: const [
+            GButton(
+              icon: Icons.flash_on_outlined,
+              text: 'Trending',
+            ),
+            GButton(
+              icon: Icons.compass_calibration_outlined,
+              text: 'Explore',
+            ),
+          ],
+          selectedIndex: selectedIndex,
+          onTabChange: (index) {
+            setState(() {
+              selectedIndex = index; // Updates the selected tab index
+            });
+          },
+        ),
+      ),
     );
   }
 }

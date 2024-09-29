@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/models/article_model.dart';
-import 'package:news_app/pages/news_detail_page.dart';
+import '../models/article_model.dart';
+import '../pages/news_detail_page.dart';
 
 Widget customNewsTile(context, {required Article? article}) {
   return InkWell(

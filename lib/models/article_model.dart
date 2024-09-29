@@ -1,4 +1,4 @@
-import 'package:news_app/models/source_model.dart';
+import 'source_model.dart';
 
 class NewsResponseModel {
   String? status;
@@ -12,8 +12,8 @@ class NewsResponseModel {
     totalResults = json['totalResults'];
     if (json['articles'] != null) {
       articles = <Article>[];
-      json['articles'].forEach((v) {
-        articles!.add(Article.fromJson(v));
+      json['articles'].forEach((article) {
+        articles!.add(Article.fromJson(article));
       });
     }
   }

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/components/custom_news_tile.dart';
-import 'package:news_app/models/article_model.dart';
-import 'package:news_app/services/api_service.dart';
+import '../components/custom_news_tile.dart';
+import '../models/article_model.dart';
+import '../services/api_service.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
-
   @override
   State<ExplorePage> createState() => _ExplorePageState();
 }
 
 class _ExplorePageState extends State<ExplorePage> {
-  ApiService userService = ApiService();
   TextEditingController searchBarController = TextEditingController();
   String query = "usa";
+  ApiService userService = ApiService();
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:news_app/models/article_model.dart';
 import 'package:http/http.dart' as http;
 import '../env.dart';
+import '../models/article_model.dart';
 
 class ApiService {
   static const String baseUrl = 'https://newsapi.org/v2';
